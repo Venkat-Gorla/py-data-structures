@@ -1,0 +1,12 @@
+# Ignore all test.py files
+**/test.py
+
+# Other common Python ignores
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+*.egg-info/
+
