@@ -5,8 +5,7 @@ def preorder(root):
     if not root:
         return
 
-    nodeStack = []
-    nodeStack.append(root)
+    nodeStack = [root]
 
     while nodeStack:
         current = nodeStack.pop()
