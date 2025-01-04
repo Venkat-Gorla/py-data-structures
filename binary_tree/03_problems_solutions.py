@@ -47,4 +47,49 @@ main()
 # 1 3 5
 
 #----------------------------------------
+# given a binary tree and a key (that may or may not be present in it) find the key's Inorder successor
+
+from node import Node
+
+# unlike C++, python doesn't have reference variables, so we use a list of one element
+# to track the previous node when doing Inorder traversal
+def find_inorder_successor(root, key, previous = [None]):
+    if not root:
+        return None
+
+    left = find_inorder_successor(root.left, key, previous)
+    if left:
+        return left
+
+    if previous[0] and previous[0].data == key:
+        return root
+
+    previous[0] = root
+
+    return find_inorder_successor(root.right, key, previous)
+
+def test_find_inorder_successor(root, key):
+    successor = find_inorder_successor(root, key)
+    if successor:
+        print(f"Inorder successor of {key} is {successor.data}")
+    else:
+        print(f"Inorder successor of {key} is Not found")
+
+def main():
+    root = Node(1)
+    root.left = Node(2)
+    root.right = Node(3)
+
+    input = [2, 1, 3]
+    for key in input:
+        test_find_inorder_successor(root, key)
+
+main()
+
+# output:
+# Inorder successor of 2 is 1
+# Inorder successor of 1 is 3
+# Inorder successor of 3 is Not found
+
+#----------------------------------------
 
