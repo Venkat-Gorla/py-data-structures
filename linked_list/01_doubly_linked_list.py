@@ -1,6 +1,10 @@
 
 # given a doubly linked list (dll), reverse it
 # reversing a dll is different and actually simpler compared to sll, let's see how to do it
+# write code to swap pairs in the list,
+# examples:
+# 1<->2<->3 should become 2<->1<->3
+# 1<->2<->3<->4 should become 2<->1<->4<->3
 
 class Node:
     """
@@ -41,7 +45,6 @@ class DoublyLinkedList:
             print(current.data, end=" <-> " if current.next else "\n")
             current = current.next
 
-    # solution code: 
     # in-place reverse method
     def reverse(self):
         # for every node, just swap the next and prev pointers
@@ -52,6 +55,76 @@ class DoublyLinkedList:
 
         # swap head and tail
         self.head, self.tail = self.tail, self.head
+
+    def swap_pairs(self):
+        # if list contains less than two elements, ignore
+        if not (self.head and self.head.next):
+            return
+
+        current = self.head
+        self.head = self.head.next # update head to the second node
+        previous = None
+
+        while current and current.next:
+            next_node = current.next.next
+
+            first = current
+            second = current.next
+
+            first.prev = second
+            second.next = first
+            second.prev = previous
+            if previous:
+                previous.next = second
+
+            previous = first
+            current = next_node
+        # end while
+
+        if current:
+            # odd number of nodes
+            current.prev = previous
+            previous.next = current
+            self.tail = current
+        else:
+            # even number of nodes
+            previous.next = None # terminate list
+            self.tail = previous
+
+    def to_list(self):
+        result = []
+        current = self.head
+        while current:
+            result.append(current.data)
+            current = current.next
+        return result
+
+    def from_list(self, lst):
+        for item in lst:
+            self.append(item)
+
+def test_swap_pairs():
+    def build_and_swap(lst):
+        dll = DoublyLinkedList()
+        dll.from_list(lst)
+        dll.swap_pairs()
+        return dll.to_list()
+
+    # Test cases
+    assert build_and_swap([]) == []
+    assert build_and_swap([1]) == [1]
+    assert build_and_swap([1, 2]) == [2, 1]
+    assert build_and_swap([1, 2, 3]) == [2, 1, 3]
+    assert build_and_swap([1, 2, 3, 4]) == [2, 1, 4, 3]
+    assert build_and_swap([1, 2, 3, 4, 5]) == [2, 1, 4, 3, 5]
+
+def test_two_node_list():
+    dll = DoublyLinkedList()
+    dll.from_list([1, 2])
+    dll.swap_pairs()
+    assert dll.to_list() == [2, 1]
+    assert dll.tail.data == 1 # Ensure tail is correctly updated
+    assert dll.tail.next is None # Ensure the list terminates properly
 
 def main():
     dll = DoublyLinkedList()
@@ -67,6 +140,10 @@ def main():
     print("Reversed list:")
     dll.print_fwd()
 
+    test_swap_pairs()
+    test_two_node_list()
+    print("\nAll test cases for swap_pairs passed.")
+
 if __name__ == "__main__":
     main()
 
@@ -75,4 +152,6 @@ if __name__ == "__main__":
 # 1 <-> 2 <-> 3 <-> 4 <-> 5
 # Reversed list:
 # 5 <-> 4 <-> 3 <-> 2 <-> 1
+
+# All test cases for swap_pairs passed.
 
