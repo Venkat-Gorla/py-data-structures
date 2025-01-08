@@ -1,7 +1,7 @@
 
-# given a doubly linked list (dll), reverse it
-# reversing a dll is different and actually simpler compared to sll, let's see how to do it
-# write code to swap pairs in the list,
+# 1. Given a doubly linked list (dll), reverse it
+#    - reversing a dll is different and actually simpler compared to sll, let's see how to do it
+# 2. Write code to swap pairs in the list,
 # examples:
 # 1<->2<->3 should become 2<->1<->3
 # 1<->2<->3<->4 should become 2<->1<->4<->3

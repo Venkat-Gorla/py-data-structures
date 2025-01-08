@@ -56,7 +56,8 @@ def main():
     topo_sort = g.get_topological_sort()
     print(f"Topological sort of the given graph is: {topo_sort}")
 
-main()
+if __name__ == "__main__":
+    main()
 
 # output:
 # Topological sort of the given graph is: [5, 4, 2, 3, 1, 0]
