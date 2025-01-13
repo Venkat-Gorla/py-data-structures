@@ -47,3 +47,6 @@ def test_trie_search():
 if __name__ == "__main__":
     test_trie_search()
 
+# output
+# Trie search test cases passed
+
