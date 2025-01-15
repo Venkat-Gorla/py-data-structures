@@ -51,7 +51,7 @@ class DoublyLinkedList:
 
             left_tree = convert_helper(num_nodes // 2, head_ref)
 
-            root = Node(head_ref[0].data)
+            root = head_ref[0] # in place conversion, no additional memory allocation
             head_ref[0] = head_ref[0].right
 
             right_tree = convert_helper(num_nodes - num_nodes // 2 - 1, head_ref)
@@ -87,11 +87,7 @@ def test_dll_build():
     assert build_dll([1, 2, 3]).to_list() == [1, 2, 3]
     print('dll build test passed')
 
-def test_convert_to_balanced_bst():
-    input_list = [1, 2, 3, 4, 5, 6, 7]
-    input_dll = build_dll(input_list)
-    assert input_dll.to_list() == input_list
-
+def validate_bst(input_list, input_dll):
     bst_root = input_dll.convert_to_balanced_bst()
     assert input_dll.head is None
     assert input_dll.tail is None
@@ -99,6 +95,17 @@ def test_convert_to_balanced_bst():
 
     inorder_list = [node.data for node in inorder_generator(bst_root)]
     assert inorder_list == input_list
+
+    return bst_root
+
+# pending: test in place conversion
+
+def test_convert_to_balanced_bst():
+    input_list = [number for number in range(1, 8)]
+    input_dll = build_dll(input_list)
+    assert input_dll.to_list() == input_list
+
+    bst_root = validate_bst(input_list, input_dll)
 
     print('printing converted tree structure')
     print_tree(bst_root)
