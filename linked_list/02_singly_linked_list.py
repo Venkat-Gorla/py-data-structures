@@ -44,6 +44,10 @@ class SinglyLinkedList:
         if self.head is None or start_index == end_index:
             return
 
+        # The idea is to divide the list into three parts: a prefix, the sub-list that
+        # needs to be reversed and a suffix.
+        # By inserting a dummy node just before the head, prefix handling becomes simple; we
+        # don't need to special case for start_index == 0
         dummy_node = Node(0)
         dummy_node.next = self.head
 
@@ -51,6 +55,7 @@ class SinglyLinkedList:
         for _ in range(start_index):
             prefix = prefix.next
 
+        # sub-list reversal
         previous = None
         current = prefix.next
         for _ in range(end_index - start_index + 1):
@@ -59,6 +64,7 @@ class SinglyLinkedList:
             previous = current
             current = next_node
 
+        # connect all three components
         first_reversed_node = prefix.next
         prefix.next = previous
         first_reversed_node.next = current

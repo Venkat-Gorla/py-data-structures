@@ -1,6 +1,7 @@
 # Inorder traversal using iteration and generator "yield"
 
 from node import Node
+from inorder_utils import inorder_generator
 
 # Iterative Inorder traversal
 def inorder_iter(root):
@@ -16,20 +17,6 @@ def inorder_iter(root):
         print(current.data, end=' ')
         current = current.right
 #end Inorder
-
-# using generator and yield
-def inorder_generator(root):
-    current = root
-    nodeStack = []
-
-    while current or nodeStack:
-        while current:
-            nodeStack.append(current)
-            current = current.left
-
-        current = nodeStack.pop()
-        yield current
-        current = current.right
 
 def test_generator(root):
     for current in inorder_generator(root):
@@ -52,7 +39,8 @@ def main():
     print("\n\nInorder traversal using generator is")
     test_generator(root)
 
-main()
+if __name__ == '__main__':
+    main()
 
 # output:
 # Inorder traversal of binary tree is
