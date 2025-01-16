@@ -29,7 +29,7 @@ def test_root_to_leaf_paths(root):
     print("Printing root to leaf paths of binary tree:")
     print_root_to_leaf_paths(root)
 
-def main():
+def main_root_to_leaf_paths():
     root = Node(1)
     root.left = Node(2)
     root.right = Node(3)
@@ -38,7 +38,8 @@ def main():
 
     test_root_to_leaf_paths(root)
 
-main()
+if __name__ == '__main__':
+    main_root_to_leaf_paths()
 
 # output:
 # Printing root to leaf paths of binary tree:
@@ -75,7 +76,7 @@ def test_find_inorder_successor(root, key):
     else:
         print(f"Inorder successor of {key} is Not found")
 
-def main():
+def main_inorder_successor():
     root = Node(1)
     root.left = Node(2)
     root.right = Node(3)
@@ -84,7 +85,8 @@ def main():
     for key in input:
         test_find_inorder_successor(root, key)
 
-main()
+if __name__ == '__main__':
+    main_inorder_successor()
 
 # output:
 # Inorder successor of 2 is 1
