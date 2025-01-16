@@ -88,17 +88,21 @@ def test_dll_build():
     print('dll build test passed')
 
 def validate_bst(input_list, input_dll):
+    list_head = input_dll.head
     bst_root = input_dll.convert_to_balanced_bst()
     assert input_dll.head is None
     assert input_dll.tail is None
     assert input_dll.length == 0
 
-    inorder_list = [node.data for node in inorder_generator(bst_root)]
-    assert inorder_list == input_list
+    inorder_data_list = [node.data for node in inorder_generator(bst_root)]
+    assert inorder_data_list == input_list
+
+    inorder_node_list = [node for node in inorder_generator(bst_root)]
+    assert list_head in inorder_node_list
+    assert list_head is inorder_node_list[0]
+    print('In place conversion memory validation passed')
 
     return bst_root
-
-# pending: test in place conversion
 
 def test_convert_to_balanced_bst():
     input_list = [number for number in range(1, 8)]
@@ -117,6 +121,7 @@ if __name__ == '__main__':
 
 # output
 # dll build test passed
+# In place conversion memory validation passed
 # printing converted tree structure
 # -->4 (root)
 #    |-->2 (L)
