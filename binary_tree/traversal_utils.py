@@ -2,8 +2,7 @@
 
 from node import Node
 
-# postorder generator function
-def postorder_generator(root):
+def _postorder_helper(root, return_path=False):
     if root is None:
         return
 
@@ -20,36 +19,38 @@ def postorder_generator(root):
             if peek_node.right and last_visited != peek_node.right:
                 current = peek_node.right
             else:
-                yield peek_node
+                if return_path:
+                    yield list(node_stack), peek_node
+                else:
+                    yield peek_node
                 last_visited = node_stack.pop()
 
-# pending: 
-# refactor common code after testing
+def postorder_generator(root):
+    """
+    Generates the nodes in postorder traversal.
+
+    Args:
+        root: The root of the binary tree.
+
+    Yields:
+        The current node being visited in postorder.
+    """
+    yield from _postorder_helper(root, return_path=False)
+
 def postorder_paths_generator(root):
     """
     In addition to generating the nodes in postorder, it also returns
     the connecting path from the root to the current node
 
-    Returns: tuple of (node_path, current_node)
+    Args:
+        root: The root of the binary tree.
+
+    Yields:
+        tuple (node_path, current_node):
+        - node_path: List of nodes representing the path from the root to the current node.
+        - current_node: The current node being visited in postorder.
     """
-    if root is None:
-        return
-
-    current = root
-    node_stack = []
-    last_visited = None
-
-    while current or node_stack:
-        if current:
-            node_stack.append(current)
-            current = current.left
-        else:
-            peek_node = node_stack[-1]
-            if peek_node.right and last_visited != peek_node.right:
-                current = peek_node.right
-            else:
-                yield list(node_stack), peek_node
-                last_visited = node_stack.pop()
+    yield from _postorder_helper(root, return_path=True)
 
 def create_tree():
     root = Node(1)
