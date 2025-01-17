@@ -5,6 +5,7 @@
 # Given a binary tree, print all root to leaf paths
 
 from node import Node, print_node_path
+from traversal_utils import postorder_paths_generator
 
 # solution helper function
 def root_to_leaf_paths(root, output_path):
@@ -29,12 +30,16 @@ def test_root_to_leaf_paths(root):
     print("Printing root to leaf paths of binary tree:")
     print_root_to_leaf_paths(root)
 
-def main_root_to_leaf_paths():
+def create_tree_for_root_leaf_paths():
     root = Node(1)
     root.left = Node(2)
     root.right = Node(3)
     root.right.left = Node(4)
     root.right.right = Node(5)
+    return root
+
+def main_root_to_leaf_paths():
+    root = create_tree_for_root_leaf_paths()
 
     test_root_to_leaf_paths(root)
 
@@ -43,6 +48,29 @@ if __name__ == '__main__':
 
 # output:
 # Printing root to leaf paths of binary tree:
+# 1 2
+# 1 3 4
+# 1 3 5
+
+#----------------------------------------
+# Given a binary tree, print all root to leaf paths
+# if you ever care about solving this problem using iteration, there is a neat solution
+# using postorder generator
+def test_postorder_root_to_leaf_paths(root):
+    print("\nPrinting root to leaf paths of binary tree using postorder generator:")
+    for node_path, current_node in postorder_paths_generator(root):
+        if current_node.is_leaf():
+            print_node_path(node_path)
+
+def main_postorder_root_to_leaf_paths():
+    root = create_tree_for_root_leaf_paths()
+    test_postorder_root_to_leaf_paths(root)
+
+if __name__ == '__main__':
+    main_postorder_root_to_leaf_paths()
+
+# output:
+# Printing root to leaf paths of binary tree using postorder generator:
 # 1 2
 # 1 3 4
 # 1 3 5
@@ -81,6 +109,7 @@ def main_inorder_successor():
     root.left = Node(2)
     root.right = Node(3)
 
+    print()
     input = [2, 1, 3]
     for key in input:
         test_find_inorder_successor(root, key)
