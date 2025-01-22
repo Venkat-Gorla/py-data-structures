@@ -31,6 +31,7 @@ def find_common_nodes(root1, root2):
             first_node = next(first_gen, None)
         else:
             second_node = next(second_gen, None)
+    print()
 
 def test_find_common_nodes():
     first_list = [5, 1, 10, 0, 4, 7, 9]
@@ -45,4 +46,52 @@ if __name__ == '__main__':
 # output:
 # Printing common nodes of given bst's:
 # 4 7 9 10
+
+#----------------------------------------
+# in place convert BST to sorted DLL i.e. doubly linked list
+
+# should be able to use inorder generator
+# dll node will also use tree node structure (left and right pointers)
+# solution function
+def convert_bst_to_dll(root):
+    """
+    In place convert bst to sorted dll
+
+    Args:
+        root: root of the bst
+
+    Returns:
+        head of the sorted dll
+    """
+    if root is None:
+        return None
+
+    gen = inorder_generator(root)
+    head_node = next(gen, None)
+    prev_node = head_node
+    for node in gen:
+        prev_node.right = node
+        node.left = prev_node
+        prev_node = node
+
+    return head_node
+
+def test_convert_bst_to_dll():
+    bst_list = [5, 1, 10, 0, 4, 7, 9]
+    print(f"\nPrinting keys list from which bst will be created: {bst_list}")
+    root = create_bst(bst_list)
+    head_node = convert_bst_to_dll(root)
+    print("Printing sorted dll after conversion from bst:")
+    while head_node is not None:
+        print(head_node.data, end=" ")
+        head_node = head_node.right
+    print()
+
+if __name__ == '__main__':
+    test_convert_bst_to_dll()
+
+# output:
+# Printing keys list from which bst will be created: [5, 1, 10, 0, 4, 7, 9]
+# Printing sorted dll after conversion from bst:
+# 0 1 4 5 7 9 10
 
