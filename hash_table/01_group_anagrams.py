@@ -10,6 +10,8 @@ def find_anagrams(input_list):
         sorted_word = ''.join(sorted(word))
         anagram_groups.setdefault(sorted_word, []).append(word)
 
+    # starting with python 3.7, values will be returned in order of insertion,
+    # so the result will be deterministic for validation inside the calling code
     return list(anagram_groups.values())
 
 def test_find_anagrams():
