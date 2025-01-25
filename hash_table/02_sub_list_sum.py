@@ -31,6 +31,7 @@ def test_get_sub_list_with_sum():
     assert get_sub_list_with_sum([1, 2, 3, 4, 5], 14) == [1, 4]
     assert get_sub_list_with_sum([1, 2, 3, 4, 5], 7) == [2, 3]
     assert get_sub_list_with_sum([1, 2, 3, 4, 5], 2) == [1, 1]
+    assert get_sub_list_with_sum([-1, -2, -2, -3, -4], -7) == [1, 3]
     assert get_sub_list_with_sum([1, 2, 3, 4, 5], 0) == []
 
     print("get_sub_list_with_sum tests passed")
