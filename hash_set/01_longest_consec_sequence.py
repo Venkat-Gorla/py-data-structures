@@ -9,11 +9,12 @@
 
 # Explanation: The longest consecutive sequence in the input array is [4, 3, 2, 1], and its length is 4.
 
-# Approach: in python the built-in set uses hashing to provide O(1) access time
-# copy the input array into a set.
-# for every input element in the array, check if it is the start of a sequence, it will be
-# the first if (number - 1) is Not present in the set.
-# calculate current sequence length and update max length.
+# Approach:
+# - in python the built-in set uses hashing to provide O(1) access time
+# - copy the input array into a set.
+# - for every input element in the array, check if it is the start of a sequence, it will be
+#   the first if (number - 1) is Not present in the set.
+# - calculate current sequence length and update max length.
 
 def longest_consecutive_sequence(numbers):
     input_set = set(numbers)
