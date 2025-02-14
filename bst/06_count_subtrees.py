@@ -8,7 +8,7 @@ from bst_utils import create_bst
 # recursive helper function, for every node we will return a "flag, count" tuple
 # that will indicate if the current subtree satisfies the range condition and the
 # number of nodes in the range
-def count_bst_subtrees(root, min_val, max_val):
+def count_bst_subtrees(root, min_val, max_val) -> tuple[bool, int]:
     if not root:
         return True, 0
 
@@ -21,7 +21,10 @@ def count_bst_subtrees(root, min_val, max_val):
         return False, left_count + right_count
 
 def count_bst_subtrees_in_range(root, min_val, max_val):
-    root_flag, root_count = count_bst_subtrees(root, min_val, max_val)
+    result_subtrees = count_bst_subtrees(root, min_val, max_val)
+    assert isinstance(result_subtrees, tuple)
+
+    root_flag, root_count = result_subtrees
     return root_count
 
 def test_count_bst_subtrees_in_range():
