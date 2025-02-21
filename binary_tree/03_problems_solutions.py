@@ -123,4 +123,66 @@ if __name__ == '__main__':
 # Inorder successor of 3 is Not found
 
 #----------------------------------------
+# Print all k-sum paths in a binary tree
+# A binary tree and a number k are given. Print every path in the tree with sum of the nodes in the path as k.
+# A path can start from any node and end at any node, i.e. they need not be root node and leaf node; and negative numbers can also be there in the tree.
+
+def find_subarrays_with_k_sum(input_path, K, output_paths):
+    running_sum = 0
+
+    for index in range(len(input_path) - 1, -1, -1):
+        running_sum += input_path[index]
+        if running_sum == K:
+            output_paths.append(input_path[index:])
+
+# solution helper function
+# we will use a slight variation of the root to leaf paths recursive function, we keep
+# track of the current path in the tree, when a new node gets appended to the path, we
+# check the sum condition starting with the last node of the path
+def k_sum_path_helper(root, K, current_path, output_paths):
+    if not root:
+        return
+
+    current_path.append(root.data)
+
+    k_sum_path_helper(root.left, K, current_path, output_paths)
+    k_sum_path_helper(root.right, K, current_path, output_paths)
+    find_subarrays_with_k_sum(current_path, K, output_paths)
+
+    current_path.pop()
+
+# solution function
+def print_k_sum_paths(root, K):
+    current_path = []
+    output_paths = []
+    k_sum_path_helper(root, K, current_path, output_paths)
+    print(f"\nPrinting all k={K} sum paths in the binary tree:")
+    print(output_paths, end=" ")
+    print()
+
+def create_tree_for_k_sum_paths():
+    root = Node(1)
+    root.left = Node(3)
+    root.left.left = Node(2)
+    root.left.right = Node(1)
+    root.left.right.left = Node(1)
+    root.right = Node(-1)
+    root.right.left = Node(4)
+    root.right.left.left = Node(1)
+    root.right.left.right = Node(2)
+    root.right.right = Node(5)
+    root.right.right.right = Node(2)
+
+    return root
+
+def test_k_sum_paths():
+    root = create_tree_for_k_sum_paths()
+    print_k_sum_paths(root, 5)
+
+if __name__ == '__main__':
+    test_k_sum_paths()
+
+# output:
+# Printing all k=5 sum paths in the binary tree:
+# [[3, 2], [3, 1, 1], [1, 3, 1], [4, 1], [1, -1, 4, 1], [-1, 4, 2], [5], [1, -1, 5]]
 
