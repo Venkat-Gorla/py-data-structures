@@ -1,7 +1,5 @@
 # some reusable code for binary tree bfs (breadth first search) algorithm
 
-# pending: add a function that returns one level of nodes each time it is called
-
 from node import Node
 from collections import deque
 
@@ -28,6 +26,29 @@ def bfs_generator(root):
         if current.right:
             node_queue.append(current.right)
 
+def bfs_levels_generator(root):
+    """
+    BFS levels generator for binary tree
+    Args:
+        root: root of the binary tree
+    Yields:
+        Each level of nodes in the tree, one at a time as a tuple
+    """
+    if root is None:
+        return
+
+    node_queue = deque([root])
+    while node_queue:
+        level_size = len(node_queue)
+        yield tuple(node_queue[i] for i in range(level_size))
+
+        for _ in range(level_size):
+            current = node_queue.popleft()
+            if current.left:
+                node_queue.append(current.left)
+            if current.right:
+                node_queue.append(current.right)
+
 def _create_test_tree():
     # create a binary tree
     #        1
@@ -51,9 +72,25 @@ def _test_bfs_generator():
         print(current.data, end=' ')
     print()
 
+def _test_bfs_levels_generator():
+    root = _create_test_tree()
+
+    print('\nPrinting levels of the binary tree:')
+    for level in bfs_levels_generator(root):
+        print('Level:', end=' ')
+        for node in level:
+            print(node.data, end=' ')
+        print()
+
 if __name__ == '__main__':
     _test_bfs_generator()
+    _test_bfs_levels_generator()
 
 # Output:
 # BFS traversal of the binary tree is:
 # 1 2 3 4 5 6
+
+# Printing levels of the binary tree:
+# Level: 1
+# Level: 2 3
+# Level: 4 5 6
