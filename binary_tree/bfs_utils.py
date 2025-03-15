@@ -77,6 +77,7 @@ def _test_bfs_levels_generator():
 
     print('\nPrinting levels of the binary tree:')
     for level in bfs_levels_generator(root):
+        assert isinstance(level, tuple)
         print('Level:', end=' ')
         for node in level:
             print(node.data, end=' ')
