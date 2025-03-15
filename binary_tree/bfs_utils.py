@@ -26,6 +26,26 @@ def bfs_generator(root):
         if current.right:
             node_queue.append(current.right)
 
+# reverse bfs generator function
+def reverse_bfs_generator(root):
+    if root is None:
+        return
+
+    node_queue = deque([root])
+    reverse_bfs = deque()
+
+    while node_queue:
+        current = node_queue.popleft()
+        reverse_bfs.appendleft(current)
+
+        if current.right:
+            node_queue.append(current.right)
+        if current.left:
+            node_queue.append(current.left)
+
+    for node in reverse_bfs:
+        yield node
+
 def bfs_levels_generator(root):
     """
     BFS levels generator for binary tree
@@ -72,6 +92,14 @@ def _test_bfs_generator():
         print(current.data, end=' ')
     print()
 
+def _test_reverse_bfs_generator():
+    root = _create_test_tree()
+
+    print('\nReverse BFS traversal of the binary tree is:')
+    for current in reverse_bfs_generator(root):
+        print(current.data, end=' ')
+    print()
+
 def _test_bfs_levels_generator():
     root = _create_test_tree()
 
@@ -85,11 +113,15 @@ def _test_bfs_levels_generator():
 
 if __name__ == '__main__':
     _test_bfs_generator()
+    _test_reverse_bfs_generator()
     _test_bfs_levels_generator()
 
 # Output:
 # BFS traversal of the binary tree is:
 # 1 2 3 4 5 6
+
+# Reverse BFS traversal of the binary tree is:
+# 4 5 6 2 3 1
 
 # Printing levels of the binary tree:
 # Level: 1
