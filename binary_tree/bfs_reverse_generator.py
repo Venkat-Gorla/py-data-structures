@@ -1,7 +1,7 @@
 # alternate solution for reverse bfs generator using default dictionary and
 # recursive dfs function
 
-from node import Node
+from node import Node, print_node_path
 from collections import defaultdict
 
 def bfs_reverse_generator(root):
@@ -40,11 +40,8 @@ def _create_test_tree():
 
 def _test_reverse_bfs_generator():
     root = _create_test_tree()
-
     print('Reverse BFS traversal of the binary tree is:')
-    for current in bfs_reverse_generator(root):
-        print(current.data, end=' ')
-    print()
+    print_node_path(bfs_reverse_generator(root))
 
 if __name__ == '__main__':
     _test_reverse_bfs_generator()
