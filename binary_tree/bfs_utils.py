@@ -1,6 +1,6 @@
 # some reusable code for binary tree bfs (breadth first search) algorithm
 
-from node import Node
+from node import Node, print_node_path
 from collections import deque
 
 def bfs_generator(root):
@@ -86,19 +86,13 @@ def _create_test_tree():
 
 def _test_bfs_generator():
     root = _create_test_tree()
-
     print('BFS traversal of the binary tree is:')
-    for current in bfs_generator(root):
-        print(current.data, end=' ')
-    print()
+    print_node_path(bfs_generator(root))
 
 def _test_reverse_bfs_generator():
     root = _create_test_tree()
-
     print('\nReverse BFS traversal of the binary tree is:')
-    for current in reverse_bfs_generator(root):
-        print(current.data, end=' ')
-    print()
+    print_node_path(reverse_bfs_generator(root))
 
 def _test_bfs_levels_generator():
     root = _create_test_tree()
