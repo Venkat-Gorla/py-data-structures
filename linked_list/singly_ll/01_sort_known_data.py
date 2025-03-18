@@ -2,10 +2,7 @@
 # Time complexity: O(n)
 # Space complexity: O(1)
 
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
+from node import *
 
 # solution function
 # we will solve this problem using pointer manipulation and not data reassignment
@@ -48,39 +45,6 @@ def get_last_node(head):
     while current.next:
         current = current.next
     return current
-
-# some helper functions for testing
-def create_list(input):
-    if not input:
-        return None
-
-    head = Node(input[0])
-    current = head
-    for i in input[1:]:
-        current.next = Node(i)
-        current = current.next
-
-    return head
-
-def is_sorted(head):
-    if not head or not head.next:
-        return True
-
-    current = head
-    while current.next:
-        if current.data > current.next.data:
-            return False
-        current = current.next
-
-    return True
-
-def get_list_len(head):
-    length = 0
-    current = head
-    while current:
-        length += 1
-        current = current.next
-    return length
 
 def _test_sort_list_known_data(input):
     head = create_list(input)
