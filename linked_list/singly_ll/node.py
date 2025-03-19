@@ -35,3 +35,12 @@ def get_list_len(head):
         length += 1
         current = current.next
     return length
+
+# create and return a python list from the linked list data
+def get_list_data(head):
+    output = []
+    current = head
+    while current:
+        output.append(current.data)
+        current = current.next
+    return output

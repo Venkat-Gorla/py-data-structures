@@ -47,12 +47,9 @@ def get_last_node(head):
     return current
 
 def _test_sort_list_known_data(input):
-    head = create_list(input)
-    input_len = get_list_len(head) # store list len, since head will be modified
-
-    sorted_head = sort_list_known_data(head)
-    assert input_len == get_list_len(sorted_head)
-    assert is_sorted(sorted_head)
+    head = sort_list_known_data(create_list(input))
+    sorted_list = get_list_data(head)
+    assert sorted_list == sorted(input)
 
 def _test_cases():
     _test_sort_list_known_data([])
