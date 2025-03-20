@@ -58,6 +58,7 @@ def _test_cases():
     _test_sort_list_known_data([2, 2, 2])
     _test_sort_list_known_data([0, 1, 2])
     _test_sort_list_known_data([2, 1, 0])
+    _test_sort_list_known_data([2, 0, 2])
     _test_sort_list_known_data([0, 2, 1, 2, 0, 1, 0, 2, 1, 0, 1, 2])
     print("All tests for sort list with known data passed")
 
