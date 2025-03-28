@@ -2,7 +2,9 @@
 
 # so your function must return both the root of the modified tree and the head of the DLL containing the leaves
 
-# Given a Binary Tree, extract all leaves of it into a Doubly Linked List (DLL). Note that the DLL need to be created in-place. Assume that the node structure of DLL and Binary Tree is same, only the meaning of left and right pointers are different. In DLL, left means previous pointer and right means next pointer.
+# Given a Binary Tree, extract all leaves of it into a Doubly Linked List (DLL). Note that the DLL need to be created in-place.
+# Assume that the node structure of DLL and Binary Tree is same, only the meaning of left and right pointers are different.
+# In DLL, left means previous pointer and right means next pointer.
 
 # Test case 1:
 # Let the following be input binary tree
