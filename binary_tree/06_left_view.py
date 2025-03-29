@@ -32,7 +32,7 @@ def get_left_view(root, current_level, output_list, max_level = [-1]):
     get_left_view(root.left, current_level + 1, output_list, max_level)
     get_left_view(root.right, current_level + 1, output_list, max_level)
 
-# alternate iterative solution using bfs levels generator
+# iterative solution using bfs levels generator
 def get_left_view_nodes_bfs(root):
     output_list = []
     for level in bfs_levels_generator(root):

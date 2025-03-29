@@ -31,8 +31,8 @@
 from node import Node, print_tree
 
 # recursive solution
-# traverse the tree, for every leaf node encountered, push it into your output DLL
-# inside the parent node of the leaf, set it's respective child pointer to None
+# - traverse the tree, for every leaf node encountered, push it into your output DLL
+# - inside the parent node of the leaf, set it's respective child pointer to None
 def extract_helper(root, dll_list):
     if root is None:
         return False
@@ -70,6 +70,28 @@ def extract_leaves(root):
 
 # test code
 def _test_extract_leaves():
+    _test_empty_tree()
+    _test_single_node_tree()
+    _test_multiple_nodes_tree()
+    print("\nAll test cases passed")
+
+def _test_empty_tree():
+    root, dll_head = extract_leaves(None)
+    assert root is None
+    assert dll_head is None
+    print("Empty binary tree validation passed")
+
+def _test_single_node_tree():
+    root = Node(1)
+    root, dll_head = extract_leaves(root)
+    assert root is None
+    assert dll_head is not None
+    assert dll_head.data == 1
+    assert dll_head.is_leaf()
+    print("Single node binary tree validation passed")
+
+def _test_multiple_nodes_tree():
+    print("\nStarting multiple nodes tree validation")
     root = _create_test_tree()
     print("Original Tree:")
     print_tree(root)
@@ -115,6 +137,10 @@ if __name__ == '__main__':
     _test_extract_leaves()
 
 # output:
+# Empty binary tree validation passed
+# Single node binary tree validation passed
+
+# Starting multiple nodes tree validation
 # Original Tree:
 # -->1 (root)
 #    |-->2 (L)
@@ -137,3 +163,5 @@ if __name__ == '__main__':
 # DLL:
 # 7 8 5 9 10
 # DLL fwd and reverse validation passed
+
+# All test cases passed
