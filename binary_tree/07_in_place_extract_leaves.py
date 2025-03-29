@@ -124,14 +124,18 @@ def _print_validate_dll(head):
         tail = current
         current = current.right
 
+    reverse_list = _get_reverse_list(tail)
+    assert fwd_list == reverse_list[::-1]
+    print("\nDLL fwd and reverse validation passed")
+
+def _get_reverse_list(tail):
     reverse_list = []
     current = tail
     while current is not None:
         reverse_list.append(current.data)
         current = current.left
 
-    assert fwd_list == reverse_list[::-1]
-    print("\nDLL fwd and reverse validation passed")
+    return reverse_list
 
 if __name__ == '__main__':
     _test_extract_leaves()
