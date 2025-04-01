@@ -29,15 +29,21 @@ def is_same_leaf_level(root):
         current_level += 1
 
     return True
+# end function
 
 # test code
 def _test_same_leaf_level():
-    assert is_same_leaf_level(None) == True
-    root = _create_test_tree()
-    assert is_same_leaf_level(root) == True
+    _test_success_case()
+    _test_failure_case()
     print("All test cases for same leaf level passed!")
 
-def _create_test_tree():
+def _test_success_case():
+    assert is_same_leaf_level(None) == True
+    root = _create_success_tree()
+    assert is_same_leaf_level(root) == True
+    print("Success test case passed")
+
+def _create_success_tree():
     root = Node(12)
     root.left = Node(5)
     root.left.left = Node(3)
@@ -46,8 +52,25 @@ def _create_test_tree():
     root.left.right.left = Node(2)
     return root
 
+def _test_failure_case():
+    root = _create_failure_tree()
+    assert is_same_leaf_level(root) == False
+    print("Failure test case passed")
+
+def _create_failure_tree():
+    root = Node(12)
+    root.left = Node(5)
+    root.left.left = Node(3)
+    root.left.left.left = Node(1)
+    root.right = Node(9)
+    root.right.left = Node(2)
+    root.right.right = Node(4)
+    return root
+
 if __name__ == "__main__":
     _test_same_leaf_level()
 
 # output:
+# Success test case passed
+# Failure test case passed
 # All test cases for same leaf level passed!
