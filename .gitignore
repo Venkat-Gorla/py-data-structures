@@ -10,3 +10,4 @@ env/
 venv/
 *.egg-info/
 
+*.swp
