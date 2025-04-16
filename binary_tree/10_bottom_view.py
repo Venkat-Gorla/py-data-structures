@@ -44,17 +44,21 @@ def get_bottom_view(root):
 
 # helper function to create vertical distance max level table
 def _update_distance_table(
-    root, 
-    vertical_dist, 
-    current_level, 
-    distance_max_level
-):
+    root: Node | None,
+    vertical_dist: int, 
+    current_level: int, 
+    distance_max_level: dict[int, int]
+) -> None:
+    """
+    Updates a hash table mapping each vertical distance to the maximum level reached in a binary tree.
+    """
+
     if root is None:
         return
 
     distance_max_level[vertical_dist] = max(
         current_level, 
-        distance_max_level.get(vertical_dist, current_level)
+        distance_max_level.get(vertical_dist, -1)
     )
 
     _update_distance_table(root.left, vertical_dist - 1, current_level + 1, distance_max_level)
