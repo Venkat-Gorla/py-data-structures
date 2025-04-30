@@ -1,4 +1,3 @@
-
 # some reusable code for inorder traversal
 
 from node import Node
@@ -28,10 +27,7 @@ def inorder_threaded_generator(root):
             yield current
             current = current.right
         else:
-            # find the inorder predecessor of current
-            predecessor = current.left
-            while predecessor.right and predecessor.right != current:
-                predecessor = predecessor.right
+            predecessor = _get_inorder_predecessor(current)
 
             if predecessor.right is None:
                 # we are going down the tree, so make a thread to current
@@ -44,6 +40,13 @@ def inorder_threaded_generator(root):
                 yield current
                 current = current.right
 # end inorder_threaded_generator
+
+# internal function for Morris inorder traversal
+def _get_inorder_predecessor(current):
+    predecessor = current.left
+    while predecessor.right and predecessor.right != current:
+        predecessor = predecessor.right
+    return predecessor
 
 # internal functions for testing
 def _test_inorder_threaded_generator(root):
